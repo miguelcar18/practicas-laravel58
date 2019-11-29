@@ -166,6 +166,9 @@ return [
          * Package Service Providers...
          */
         Barryvdh\Debugbar\ServiceProvider::class,
+        Junges\ACL\ACLServiceProvider::class,
+        Junges\ACL\ACLAuthServiceProvider::class,
+        Junges\ACL\ACLEventsServiceProvider::class,
 
         /*
          * Application Service Providers...
