@@ -19,3 +19,4 @@ Route::get('refresh-csrf', function () {
 })->name('refresh-csrf');
 
 Route::get('home', ['as' => 'home', 'uses' => 'HomeController@index', 'middleware' => ['auth', 'verified']]);
+Route::resource('user', 'UserController');

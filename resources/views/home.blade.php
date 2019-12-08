@@ -20,6 +20,8 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+        @section('styles')
+        @show
     </head>
     <body>
         @include('layouts.preloader')
@@ -27,6 +29,7 @@
             @include('layouts.header')
             @include('layouts.sidebar')
             <div class="page-wrapper">
+                @section('content')
                 @include('layouts.breadcrum')
                 <div class="container-fluid">
                     <div class="row">
@@ -40,6 +43,7 @@
                         </div>
                     </div>
                 </div>
+                @show
                 @include('layouts.footer')
             </div>
         </div>
@@ -57,5 +61,7 @@
         <script src="{{ asset('dist/js/sidebarmenu.js') }}"></script>
         <!--Custom JavaScript -->
         <script src="{{ asset('dist/js/custom.min.js') }}"></script>
+        @section('javascripts')
+        @show
     </body>
 </html>
