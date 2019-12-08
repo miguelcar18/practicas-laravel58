@@ -16,25 +16,37 @@
 	                    <div class="form-group row">
 	                        <label for="name" class="col-sm-3 text-right control-label col-form-label">{{ trans('pages/user.fields.name') }}</label>
 	                        <div class="col-sm-7">
-	                            {!! Form::text('name', old('name'), ['class' => 'form-control', 'placeholder' => trans('pages/user.fields.name'), 'required' => true]) !!}
+	                            {!! Form::text('name', old('name'), ['class' => $errors->first('name') ? 'form-control is-invalid' : 'form-control', 'placeholder' => trans('pages/user.fields.name'), 'required' => true]) !!}
+	                            @error('name')
+	                            	<div class="invalid-feedback">{{ $message }}</div>
+	                            @enderror
 	                        </div>
 	                    </div>
 	                    <div class="form-group row">
 	                        <label for="email" class="col-sm-3 text-right control-label col-form-label">{{ trans('pages/user.fields.email') }}</label>
 	                        <div class="col-sm-7">
-	                            {!! Form::email('email', old('email'), ['class' => 'form-control', 'placeholder' => trans('pages/user.fields.email'), 'required' => true]) !!}
+	                            {!! Form::email('email', old('email'), ['class' => $errors->first('email') ? 'form-control is-invalid' : 'form-control', 'placeholder' => trans('pages/user.fields.email'), 'required' => true]) !!}
+	                            @error('email')
+	                            	<div class="invalid-feedback">{{ $message }}</div>
+	                            @enderror
 	                        </div>
 	                    </div>
 	                    <div class="form-group row">
 	                        <label for="password" class="col-sm-3 text-right control-label col-form-label">{{ trans('pages/user.fields.password') }}</label>
 	                        <div class="col-sm-7">
-	                            {!! Form::password('password', ['class' => 'form-control', 'placeholder' => trans('pages/user.fields.password'), 'required' => true]) !!}
+	                            {!! Form::password('password', ['class' => $errors->first('password') ? 'form-control is-invalid' : 'form-control', 'placeholder' => trans('pages/user.fields.password'), 'required' => true]) !!}
+	                            @error('password')
+	                            	<div class="invalid-feedback">{{ $message }}</div>
+	                            @enderror
 	                        </div>
 	                    </div>
 	                    <div class="form-group row">
 	                        <label for="password_confirmation" class="col-sm-3 text-right control-label col-form-label">{{ trans('pages/user.fields.password_confirmation') }}</label>
 	                        <div class="col-sm-7">
-	                           {!! Form::password('password_confirmation', ['class' => 'form-control', 'placeholder' => trans('pages/user.fields.password_confirmation'), 'required' => true]) !!}
+	                           {!! Form::password('password_confirmation', ['class' => $errors->first('password_confirmation') ? 'form-control is-invalid' : 'form-control', 'placeholder' => trans('pages/user.fields.password_confirmation'), 'required' => true]) !!}
+	                           @error('password_confirmation')
+	                            	<div class="invalid-feedback">{{ $message }}</div>
+	                            @enderror
 	                        </div>
 	                    </div>
 	                </div>
