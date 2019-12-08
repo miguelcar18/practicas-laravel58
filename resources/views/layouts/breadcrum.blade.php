@@ -5,8 +5,10 @@
             <div class="ml-auto text-right">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ $title ?? 'Full width' }}</li>
+                        <li class="breadcrumb-item"><a href="{{ route(trans('pages/sections/left-bar.home.route')) }}">{{ trans('pages/sections/left-bar.home.text') }}</a></li>
+                        @if(!empty($title))
+                        <li class="breadcrumb-item active" aria-current="page">{{ $title }}</li>
+                        @endif
                     </ol>
                 </nav>
             </div>

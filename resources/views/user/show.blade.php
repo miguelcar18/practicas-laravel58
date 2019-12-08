@@ -1,12 +1,17 @@
 @extends('home')
 
-@section('content')
+@section('page-title')
+    {{ trans('pages/login.meta.title') }}
+@endsection
+
+@section('page-content')
+
 @include('layouts.breadcrum', ['title' => 'Usuarios'])
 
-@stop
+@endsection
 
 @section('styles')
-@stop
+@endsection
 
-@section('javascripts')
-@stop
+@section('scripts')
+@endsection

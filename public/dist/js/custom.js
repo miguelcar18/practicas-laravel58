@@ -114,4 +114,35 @@ $(function() {
             $("#main-wrapper").attr("data-sidebartype", "full");
         }
     });
+
+    //****************************
+    /* This is for Datatables*/
+    //****************************
+
+    let currentRoot = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
+    $('#table_datatable').DataTable({
+        "language": {
+            "url": `${currentRoot}/assets/extra-libs/DataTables/languages/spanish.json`
+        }
+    });
+
+    $('.tooltip-error').click(function (e) {
+        e.preventDefault();
+        Swal.fire({
+            title: $(this).data('title'),
+            text: $(this).data('text'),
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: $(this).data('confirm'),
+            cancelButtonText: $(this).data('cancel')
+        }).then((result) => {
+            if (result.value) {
+                let form = $('#form-delete');
+                let replaceAction = form.attr('action', form.attr('action').replace('USER_ID', $(this).data('id')));
+                form.submit();
+            }
+        });
+    });
 });

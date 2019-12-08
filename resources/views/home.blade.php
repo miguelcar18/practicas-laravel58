@@ -5,13 +5,23 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
-        <meta name="author" content="">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="title" content="@yield('page-title') | {{ config('app.name', 'Eventos felices') }}">
+        <meta description="@yield('page-description')">
+
+        <title>@yield('page-title') | {{ config('app.name', 'Eventos felices') }}</title>
+
         <!-- Favicon icon -->
         <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/favicon.png') }}">
-        <title>Matrix Template - The Ultimate Multipurpose admin template</title>
         <!-- Custom CSS -->
         <link href="{{ asset('assets/libs/fullcalendar/dist/fullcalendar.min.css') }}" rel="stylesheet" />
+        <!--Sweet Alert -->
+        <link href="{{ asset('assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet">
+        <!--Datatables -->
+        <link href="{{ asset('assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css') }}" rel="stylesheet">
+        <!--Toastr -->
+        <link href="{{ asset('assets/libs/toastr/build/toastr.min.css') }}" rel="stylesheet">
+
         <link href="{{ asset('assets/extra-libs/calendar/calendar.css') }}" rel="stylesheet" />
         <link href="{{ asset('dist/css/style.min.css') }}" rel="stylesheet">
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -29,7 +39,7 @@
             @include('layouts.header')
             @include('layouts.sidebar')
             <div class="page-wrapper">
-                @section('content')
+                @section('page-content')
                 @include('layouts.breadcrum')
                 <div class="container-fluid">
                     <div class="row">
@@ -59,9 +69,24 @@
         <script src="{{ asset('dist/js/waves.js') }}"></script>
         <!--Menu sidebar -->
         <script src="{{ asset('dist/js/sidebarmenu.js') }}"></script>
+        <!--Sweet alert -->
+        <script src="{{ asset('assets/libs/sweetalert2/sweetalert2.all.min.js') }}"></script>
+        <!--Datatables -->
+        <script src="{{ asset('assets/extra-libs/DataTables/datatables.min.js') }}"></script>
+        <!--Toastr -->
+        <script src="{{ asset('assets/libs/toastr/build/toastr.min.js') }}"></script>
+
         <!--Custom JavaScript -->
-        <script src="{{ asset('dist/js/custom.min.js') }}"></script>
-        @section('javascripts')
+        <script src="{{ asset('dist/js/custom.js') }}"></script>
+        <script type="text/javascript">
+            @if(!empty($success = $success ?? session()->get('success')))
+            toastr.success('{{ $success }}', '');
+            @endif
+            @if(!empty($error = $error ?? session()->get('error')))
+            toastr.error('', '{{ $error }}');
+            @endif
+        </script>
+        @section('scripts')
         @show
     </body>
 </html>

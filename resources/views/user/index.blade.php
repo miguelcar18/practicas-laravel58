@@ -1,23 +1,28 @@
 @extends('home')
 
-@section('content')
-@include('layouts.breadcrum', ['title' => 'Usuarios'])
+@section('page-title')
+    {{ trans('pages/user.index.page_title') }}
+@endsection
+
+@section('page-content')
+@include('layouts.breadcrum', ['title' => trans('pages/user.index.breadcrumb')])
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Usuarios</h5>
-                    <div class="card-body">
-                        <a href="{{ route('user.create') }}" class="btn btn-success float-right"><i class="fas fa-plus"></i> Agregar</a>
-                    </div>
+                    <h5 class="card-title">
+                        {{ trans('pages/user.index.page_header') }}
+                        <a href="{{ route('user.create') }}" class="btn btn-success float-right"><i class="fas fa-plus"></i> {{ trans('pages/user.index.create') }}</a>
+                    </h5>
+                    <br>
                     <div class="table-responsive">
-                        <table id="zero_config" class="table table-striped table-bordered">
+                        <table id="table_datatable" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Nombre</th>
-                                    <th>Email</th>
-                                    <th>Acciones</th>
+                                    <th>{{ trans('pages/user.index.columns.name') }}</th>
+                                    <th>{{ trans('pages/user.index.columns.email') }}</th>
+                                    <th>{{ trans('pages/user.index.columns.actions') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -27,16 +32,22 @@
                                     <td>{{ $user->email }}</td>
                                     <td>
                                         <a href="{{ route('user.edit', $user->id) }}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                                        <a href="#" data-id="{{ $user->id }}" class="btn btn-danger tooltip-error"><i class="fas fa-trash"></i></a>
+                                        <a href="#" 
+                                            data-id="{{ $user->id }}" 
+                                            data-title="{{ trans('pages/user.index.destroy.alert.title') }}" 
+                                            data-text="{{ trans('pages/user.index.destroy.alert.text') }}" 
+                                            data-confirm="{{ trans('pages/user.index.destroy.alert.confirm') }}" 
+                                            data-cancel="{{ trans('pages/user.index.destroy.alert.cancel') }}" 
+                                            class="btn btn-danger tooltip-error"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Nombre</th>
-                                    <th>Email</th>
-                                    <th>Acciones</th>
+                                    <th>{{ trans('pages/user.index.columns.name') }}</th>
+                                    <th>{{ trans('pages/user.index.columns.email') }}</th>
+                                    <th>{{ trans('pages/user.index.columns.actions') }}</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -48,29 +59,10 @@
         </div>
     </div>
 </div>
-@stop
+@endsection
 
 @section('styles')
-<link href="{{ asset('assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css') }}" rel="stylesheet">
-@stop
+@endsection
 
-@section('javascripts')
-<script src="{{ asset('assets/extra-libs/DataTables/datatables.min.js') }}"></script>
-<script type="text/javascript">
-
-    $('#zero_config').DataTable();
-
-    $('.tooltip-error').click(function (e) {
-        let message = "¿Está realmente seguro(a) de eliminar este registro?";
-
-        if(confirm(message)){
-            let form = $('#form-delete');
-            let replaceAction = form.attr('action', form.attr('action').replace('USER_ID', $(this).data('id')));
-            form.submit();
-        } else {
-            e.preventDefault();
-        }
-    });
-
-</script>
-@stop
+@section('scripts')
+@endsection

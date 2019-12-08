@@ -1,7 +1,11 @@
 @extends('home')
 
-@section('content')
-@include('layouts.breadcrum', ['title' => 'Registrar usuario'])
+@section('page-title')
+    {{ trans('pages/user.create.page_title') }}
+@endsection
+
+@section('page-content')
+@include('layouts.breadcrum', ['title' => trans('pages/user.create.breadcrumb')])
 
 <div class="container-fluid">
 	<div class="row">
@@ -10,33 +14,34 @@
 	            {!! Form::open(['route' => ['user.store'], 'class' => 'form-horizontal']) !!}
 	                <div class="card-body">
 	                    <div class="form-group row">
-	                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">Nombre</label>
-	                        <div class="col-sm-9">
-	                            {!! Form::text('name', old('name'), ['class' => 'form-control', 'required' => true]) !!}
+	                        <label for="name" class="col-sm-3 text-right control-label col-form-label">{{ trans('pages/user.fields.name') }}</label>
+	                        <div class="col-sm-7">
+	                            {!! Form::text('name', old('name'), ['class' => 'form-control', 'placeholder' => trans('pages/user.fields.name'), 'required' => true]) !!}
 	                        </div>
 	                    </div>
 	                    <div class="form-group row">
-	                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">Email</label>
-	                        <div class="col-sm-9">
-	                            {!! Form::email('email', old('email'), ['class' => 'form-control', 'required' => true]) !!}
+	                        <label for="email" class="col-sm-3 text-right control-label col-form-label">{{ trans('pages/user.fields.email') }}</label>
+	                        <div class="col-sm-7">
+	                            {!! Form::email('email', old('email'), ['class' => 'form-control', 'placeholder' => trans('pages/user.fields.email'), 'required' => true]) !!}
 	                        </div>
 	                    </div>
 	                    <div class="form-group row">
-	                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">Contraseña</label>
-	                        <div class="col-sm-9">
-	                            {!! Form::password('password', ['class' => 'form-control', 'required' => true]) !!}
+	                        <label for="password" class="col-sm-3 text-right control-label col-form-label">{{ trans('pages/user.fields.password') }}</label>
+	                        <div class="col-sm-7">
+	                            {!! Form::password('password', ['class' => 'form-control', 'placeholder' => trans('pages/user.fields.password'), 'required' => true]) !!}
 	                        </div>
 	                    </div>
 	                    <div class="form-group row">
-	                        <label for="email1" class="col-sm-3 text-right control-label col-form-label">Confirmar contraseña</label>
-	                        <div class="col-sm-9">
-	                           {!! Form::password('password_confirmation', ['class' => 'form-control', 'required' => true]) !!}
+	                        <label for="password_confirmation" class="col-sm-3 text-right control-label col-form-label">{{ trans('pages/user.fields.password_confirmation') }}</label>
+	                        <div class="col-sm-7">
+	                           {!! Form::password('password_confirmation', ['class' => 'form-control', 'placeholder' => trans('pages/user.fields.password_confirmation'), 'required' => true]) !!}
 	                        </div>
 	                    </div>
 	                </div>
 	                <div class="border-top">
 	                    <div class="card-body">
-	                        {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
+	                    	<a href="{{ route('user.index') }}" class="btn btn-secondary">{{ trans('pages/user.fields.submit.cancel') }}</a>
+	                        {!! Form::submit(trans('pages/user.fields.submit.save'), ['class' => 'btn btn-primary float-right']) !!}
 	                    </div>
 	                </div>
 	            {!! Form::close() !!}
@@ -45,10 +50,10 @@
 	</div>
 </div>
 
-@stop
+@endsection
 
 @section('styles')
-@stop
+@endsection
 
-@section('javascripts')
-@stop
+@section('scripts')
+@endsection
