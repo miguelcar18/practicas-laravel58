@@ -9,7 +9,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Usuarios</h5>
                     <div class="card-body">
-                        <a href="{{ route('user.create') }}" class="btn btn-success"><i class="fas fa-plus"></i> Agregar</a>
+                        <a href="{{ route('user.create') }}" class="btn btn-success float-right"><i class="fas fa-plus"></i> Agregar</a>
                     </div>
                     <div class="table-responsive">
                         <table id="zero_config" class="table table-striped table-bordered">
