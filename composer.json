@@ -15,7 +15,8 @@
         "laravelcollective/html": "^5.8.0",
         "mateusjunges/laravel-acl": "^2.2",
         "nesbot/carbon": "^2.27",
-        "ramsey/uuid": "^3.9"
+        "ramsey/uuid": "^3.9", 
+        "webpatser/laravel-uuid": "^3.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",
