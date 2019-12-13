@@ -52,11 +52,33 @@ return [
         'breadcrumb' => 'Editar usuario',
     ],
 
+    'my_profile' => [
+        'page_title' => 'Mi perfil',
+        'page_header' => 'Mi perfil',
+        'breadcrumb' => 'Mi perfil',
+
+        'avatar' => [
+            'heading' => 'Avatar público',
+        ],
+
+        'profile' => [
+            'heading' => 'Perfil público',
+            'text' => 'Esta es la información que compartes con otros usuarios.',
+        ],
+
+        'password' => [
+            'heading' => 'Cambiar contraseña',
+            'text' => 'Ingresa una nueva contraseña y confirma para cambiar tu contraseña actual por una nueva.',
+        ],
+    ],
+
     'fields' => [
         'name' => 'Nombre',
         'email' => 'Email',
         'password' => 'Contraseña',
         'password_confirmation' => 'Repetir contraseña', 
+        'image' => 'Imagen',
+        'created_at' => 'Creado',
         'submit' => [
             'save' => 'Guardar',
             'cancel' => 'Cancelar',

@@ -69,6 +69,8 @@
         <script src="{{ asset('dist/js/waves.js') }}"></script>
         <!--Menu sidebar -->
         <script src="{{ asset('dist/js/sidebarmenu.js') }}"></script>
+        <!--Moment -->
+        <script src="{{ asset('assets/extra-libs/moment/moment.js') }}"></script>
         <!--Sweet alert -->
         <script src="{{ asset('assets/libs/sweetalert2/sweetalert2.all.min.js') }}"></script>
         <!--Datatables -->

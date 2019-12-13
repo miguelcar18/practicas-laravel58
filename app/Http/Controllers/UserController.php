@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\User\StoreRequest;
 use App\Http\Requests\User\UpdateRequest;
 use App\User;
+use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -44,6 +45,13 @@ class UserController extends Controller
             $user = new User($request->only('name', 'email'));
             $user->password = Hash::make($request['password']);
             $user->save();
+
+            if (!empty($request->file('file'))) {
+                $fileName = str_replace(' ', '_', Carbon::now()->toDateTimeString() . $request->file('file')->getClientOriginalName());
+                $path = $request->file('file')->storeAs($user->id, $fileName);
+                $user->path = $path."/".$fileName;
+                $user->save();
+            }
         });
         return redirect()->route('user.index')->withSuccess("Usuario agregado");
     }
@@ -57,6 +65,17 @@ class UserController extends Controller
     public function show(User $user)
     {
         return view('user.show', compact('user'));
+    }
+
+    /**
+     *  Show the form to edit my profile
+     *  @param Illuminate\Http\Request $request
+     *  @return  view
+     */
+    public function myProfile(Request $request)
+    {
+        $user = auth()->user();
+        return view('user.my-profile', compact('user'));
     }
 
     /**

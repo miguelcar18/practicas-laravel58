@@ -20,3 +20,11 @@ Route::get('refresh-csrf', function () {
 
 Route::get('home', ['as' => 'home', 'uses' => 'HomeController@index', 'middleware' => ['auth', 'verified']]);
 Route::resource('user', 'UserController');
+Route::get('my-profile', ['as' => 'user.my-profile', 'uses' => 'UserController@myProfile']);
+/*
+Route::group(['prefix' => '/user/{user}'], function () {
+	Route::match(['post', 'put'], 'password/change', ['as' => 'password.change', 'uses' => 'UserController@passwordChange']);
+	Route::match(['post', 'put'], 'photo', ['as' => 'user.photo.change', 'uses' => 'UserController@photoChange']);
+	Route::get('/groups', ['as' => 'user.groups', 'uses' => 'UserController@getGroups']);
+});
+*/

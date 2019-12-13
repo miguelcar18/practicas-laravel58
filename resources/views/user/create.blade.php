@@ -11,7 +11,7 @@
 	<div class="row">
 	    <div class="col-md-12">
 	        <div class="card">
-	            {!! Form::open(['route' => ['user.store'], 'class' => 'form-horizontal']) !!}
+	            {!! Form::open(['route' => ['user.store'], 'class' => 'form-horizontal', 'files' => true]) !!}
 	                <div class="card-body">
 	                    <div class="form-group row">
 	                        <label for="name" class="col-sm-3 text-right control-label col-form-label">{{ trans('pages/user.fields.name') }}</label>
@@ -46,8 +46,16 @@
 	                           {!! Form::password('password_confirmation', ['class' => $errors->first('password_confirmation') ? 'form-control is-invalid' : 'form-control', 'placeholder' => trans('pages/user.fields.password_confirmation'), 'required' => true]) !!}
 	                           @error('password_confirmation')
 	                            	<div class="invalid-feedback">{{ $message }}</div>
-	                            @enderror
+	                           @enderror
 	                        </div>
+	                    </div>
+	                    <div class="form-group row">
+	                    	<label for="image" class="col-md-3 text-right control-label col-form-label">{{ trans('pages/user.fields.image') }}</label>
+	                    	<div class="col-md-7">
+	                    		<div class="custom-file">
+	                    			{{ Form::file('file', ['class' => 'form-control']) }}
+	                    		</div>
+	                    	</div>
 	                    </div>
 	                </div>
 	                <div class="border-top">

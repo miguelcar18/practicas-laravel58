@@ -145,4 +145,10 @@ $(function() {
             }
         });
     });
+
+    $('span.date-time-format').each(function(index, el) {
+        if(moment.utc($(el).text()).isValid()){
+            $(el).text(moment.utc($(el).text()).format('DD/MM/YYYY hh:mm:ss a'));
+        }
+    });
 });
