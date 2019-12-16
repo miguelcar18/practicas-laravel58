@@ -28,4 +28,10 @@ return [
         'route' => 'category.index',
         'icon' => 'checkbox-multiple-blank',
     ],
+
+    'product' => [
+        'text' => 'Productos',
+        'route' => 'product.index',
+        'icon' => 'barcode-scan',
+    ],
 ];

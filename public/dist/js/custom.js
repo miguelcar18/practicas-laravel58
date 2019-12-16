@@ -151,4 +151,6 @@ $(function() {
             $(el).text(moment.utc($(el).text()).format('DD/MM/YYYY hh:mm:ss a'));
         }
     });
+
+    $(".select2").select2();
 });

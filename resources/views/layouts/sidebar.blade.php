@@ -15,6 +15,11 @@
                         <i class="mdi mdi-{{ trans('pages/sections/left-bar.category.icon') }}"></i><span class="hide-menu">{{ trans('pages/sections/left-bar.category.text') }}</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route(trans('pages/sections/left-bar.product.route')) }}" aria-expanded="false">
+                        <i class="mdi mdi-{{ trans('pages/sections/left-bar.product.icon') }}"></i><span class="hide-menu">{{ trans('pages/sections/left-bar.product.text') }}</span>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- End Sidebar navigation -->

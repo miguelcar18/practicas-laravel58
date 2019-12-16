@@ -18,5 +18,8 @@ return [
     'category_created' => 'Categoría agregada',
     'category_updated' => 'Categoría modificada',
     'category_deleted' => 'Categoría eliminada',
+    'product_created' => 'Producto agregado',
+    'product_updated' => 'Producto modificado',
+    'product_deleted' => 'Producto eliminado',
 
 ];

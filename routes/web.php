@@ -22,6 +22,7 @@ Route::get('home', ['as' => 'home', 'uses' => 'HomeController@index', 'middlewar
 Route::get('my-profile', ['as' => 'user.my-profile', 'uses' => 'UserController@myProfile']);
 Route::resource('user', 'UserController');
 Route::resource('category', 'CategoryController');
+Route::resource('product', 'ProductController');
 
 /*
 Route::group(['prefix' => '/user/{user}'], function () {

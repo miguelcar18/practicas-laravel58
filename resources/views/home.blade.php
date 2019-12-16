@@ -21,6 +21,8 @@
         <link href="{{ asset('assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css') }}" rel="stylesheet">
         <!--Toastr -->
         <link href="{{ asset('assets/libs/toastr/build/toastr.min.css') }}" rel="stylesheet">
+        <!--Select2 -->
+        <link href="{{ asset('assets/libs/select2/dist/css/select2.min.css') }}" rel="stylesheet" type="text/css">
 
         <link href="{{ asset('assets/extra-libs/calendar/calendar.css') }}" rel="stylesheet" />
         <link href="{{ asset('dist/css/style.min.css') }}" rel="stylesheet">
@@ -77,6 +79,9 @@
         <script src="{{ asset('assets/extra-libs/DataTables/datatables.min.js') }}"></script>
         <!--Toastr -->
         <script src="{{ asset('assets/libs/toastr/build/toastr.min.js') }}"></script>
+        <!--Select2 -->
+        <script src="{{ asset('assets/libs/select2/dist/js/select2.full.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/select2/dist/js/select2.min.js') }}"></script>
 
         <!--Custom JavaScript -->
         <script src="{{ asset('dist/js/custom.js') }}"></script>
