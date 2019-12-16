@@ -22,4 +22,10 @@ return [
         'route' => 'user.index',
         'icon' => 'account',
     ],
+
+    'category' => [
+        'text' => 'Categorías',
+        'route' => 'category.index',
+        'icon' => 'checkbox-multiple-blank',
+    ],
 ];

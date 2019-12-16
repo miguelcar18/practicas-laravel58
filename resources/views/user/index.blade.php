@@ -32,12 +32,12 @@
                                     <td>{{ $user->email }}</td>
                                     <td>
                                         <a href="{{ route('user.edit', $user->id) }}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                                        <a href="#" 
-                                            data-id="{{ $user->id }}" 
-                                            data-title="{{ trans('pages/user.index.destroy.alert.title') }}" 
-                                            data-text="{{ trans('pages/user.index.destroy.alert.text') }}" 
-                                            data-confirm="{{ trans('pages/user.index.destroy.alert.confirm') }}" 
-                                            data-cancel="{{ trans('pages/user.index.destroy.alert.cancel') }}" 
+                                        <a href="#"
+                                            data-id="{{ $user->id }}"
+                                            data-title="{{ trans('pages/user.index.destroy.alert.title') }}"
+                                            data-text="{{ trans('pages/user.index.destroy.alert.text') }}"
+                                            data-confirm="{{ trans('pages/user.index.destroy.alert.confirm') }}"
+                                            data-cancel="{{ trans('pages/user.index.destroy.alert.cancel') }}"
                                             class="btn btn-danger tooltip-error"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
@@ -51,7 +51,7 @@
                                 </tr>
                             </tfoot>
                         </table>
-                        {!! Form::open(array('route' => array('user.destroy', 'USER_ID'), 'method' => 'DELETE', 'role' => 'form', 'id' => 'form-delete')) !!}
+                        {!! Form::open(array('route' => array('user.destroy', 'REPLACE_ID'), 'method' => 'DELETE', 'role' => 'form', 'id' => 'form-delete')) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>

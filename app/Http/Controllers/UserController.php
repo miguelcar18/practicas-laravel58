@@ -49,11 +49,11 @@ class UserController extends Controller
             if (!empty($request->file('file'))) {
                 $fileName = str_replace(' ', '_', Carbon::now()->toDateTimeString() . $request->file('file')->getClientOriginalName());
                 $path = $request->file('file')->storeAs($user->id, $fileName);
-                $user->path = $path."/".$fileName;
+                $user->path = $path . "/" . $fileName;
                 $user->save();
             }
         });
-        return redirect()->route('user.index')->withSuccess("Usuario agregado");
+        return redirect()->route('user.index')->withSuccess(__('pages/sections/notifications.user_created'));
     }
 
     /**
@@ -100,12 +100,12 @@ class UserController extends Controller
     {
         DB::transaction(function () use ($request, $user) {
             $user->update($request->only('name', 'email'));
-            if(!empty($request['password'])){
+            if (!empty($request['password'])) {
                 $user->password = Hash::make($request['password']);
             }
             $user->save();
         });
-        return redirect()->route('user.index')->withSuccess("Usuario modificado");
+        return redirect()->route('user.index')->withSuccess(__('pages/sections/notifications.user_updated'));
     }
 
     /**
@@ -117,6 +117,6 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return back()->withSuccess('Usuario eliminado');
+        return back()->withSuccess(__('pages/sections/notifications.user_deleted'));
     }
 }

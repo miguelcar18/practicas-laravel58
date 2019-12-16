@@ -15,7 +15,7 @@
 	            	{{ method_field('PUT') }}
 	                <div class="card-body">
 	                    <div class="form-group row">
-	                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">{{ trans('pages/user.fields.name') }}</label>
+	                        <label for="name" class="col-sm-3 text-right control-label col-form-label">{{ trans('pages/user.fields.name') }}</label>
 	                        <div class="col-sm-9">
 	                            {!! Form::text('name', old('name') ?? $user->name, ['class' => $errors->first('name') ? 'form-control is-invalid' : 'form-control', 'required' => true]) !!}
 	                            @error('name')
@@ -24,7 +24,7 @@
 	                        </div>
 	                    </div>
 	                    <div class="form-group row">
-	                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">{{ trans('pages/user.fields.email') }}</label>
+	                        <label for="email" class="col-sm-3 text-right control-label col-form-label">{{ trans('pages/user.fields.email') }}</label>
 	                        <div class="col-sm-9">
 	                            {!! Form::email('email', old('email') ?? $user->email, ['class' => $errors->first('email') ? 'form-control is-invalid' : 'form-control', 'required' => true]) !!}
 	                            @error('email')

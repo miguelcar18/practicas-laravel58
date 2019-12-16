@@ -14,19 +14,19 @@ return [
      */
     'models' => [
         /*
-         | The model you want to use as User Model must use MateusJunges\ACL\Traits\UsersTrait
+        | The model you want to use as User Model must use MateusJunges\ACL\Traits\UsersTrait
          */
-        'user'       => \App\User::class,
+        'user' => \App\User::class,
 
         /*
-         | The model you want to use as Permission model must use the MateusJunges\ACL\Traits\PermissionsTrait
+        | The model you want to use as Permission model must use the MateusJunges\ACL\Traits\PermissionsTrait
          */
         'permission' => Junges\ACL\Http\Models\Permission::class,
 
         /*
-         | The model you want to use as Group model must use the MateusJunges\ACL\Traits\GroupsTrait
+        | The model you want to use as Group model must use the MateusJunges\ACL\Traits\GroupsTrait
          */
-        'group'      => Junges\ACL\Http\Models\Group::class,
+        'group' => Junges\ACL\Http\Models\Group::class,
     ],
     /*
     |--------------------------------------------------------------------------
@@ -42,19 +42,19 @@ return [
     |
      */
     'tables' => [
-        'groups'                      => 'groups',
-        'permissions'                 => 'permissions',
-        'users'                       => 'users',
-        'group_has_permissions'       => 'group_has_permissions',
-        'user_has_permissions'        => 'user_has_permissions',
-        'user_has_groups'             => 'user_has_groups',
+        'groups' => 'groups',
+        'permissions' => 'permissions',
+        'users' => 'users',
+        'group_has_permissions' => 'group_has_permissions',
+        'user_has_permissions' => 'user_has_permissions',
+        'user_has_groups' => 'user_has_groups',
     ],
 
     /*
-     |
-     |If you want to customize your tables, set this flag to "true"
-     | */
-    'custom_migrations' => false,
+    |
+    |If you want to customize your tables, set this flag to "true"
+    | */
+    'custom_migrations' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -65,6 +65,6 @@ return [
     |
     | The solutions will then be automatically registered with ignition if its installed.
     |
-    */
+     */
     'offer_solutions' => false,
 ];

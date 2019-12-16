@@ -140,7 +140,7 @@ $(function() {
         }).then((result) => {
             if (result.value) {
                 let form = $('#form-delete');
-                let replaceAction = form.attr('action', form.attr('action').replace('USER_ID', $(this).data('id')));
+                let replaceAction = form.attr('action', form.attr('action').replace('REPLACE_ID', $(this).data('id')));
                 form.submit();
             }
         });
