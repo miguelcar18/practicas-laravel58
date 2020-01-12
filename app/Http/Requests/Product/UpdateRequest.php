@@ -28,9 +28,13 @@ class UpdateRequest extends BaseRequest
             'code' => [
                 'required',
                 'string',
-                Rule::unique('products')->ignore($this->product->id),
+                Rule::unique('products', 'code')->ignore($this->product->id),
             ],
-            'name' => 'required|string',
+            'name' => [
+                'required',
+                'string',
+                Rule::unique('products', 'name')->ignore($this->product->id),
+            ],
             'price' => 'required|numeric|min:0|gt:0',
             'category_id' => 'required|exists:categories,id',
         ];

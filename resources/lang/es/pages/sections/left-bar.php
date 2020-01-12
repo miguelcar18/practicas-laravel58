@@ -34,4 +34,16 @@ return [
         'route' => 'product.index',
         'icon' => 'barcode-scan',
     ],
+
+    'inventory' => [
+        'text' => 'Inventario',
+        'route' => 'inventory.index',
+        'icon' => 'dropbox',
+    ],
+
+    'event' => [
+        'text' => 'Eventos',
+        'route' => 'event.index',
+        'icon' => 'calendar-text',
+    ],
 ];

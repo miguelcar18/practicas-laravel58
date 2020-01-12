@@ -23,6 +23,8 @@
         <link href="{{ asset('assets/libs/toastr/build/toastr.min.css') }}" rel="stylesheet">
         <!--Select2 -->
         <link href="{{ asset('assets/libs/select2/dist/css/select2.min.css') }}" rel="stylesheet" type="text/css">
+        <!--Flatpickr -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/libs/flatpickr/flatpickr.min.css') }}">
 
         <link href="{{ asset('assets/extra-libs/calendar/calendar.css') }}" rel="stylesheet" />
         <link href="{{ asset('dist/css/style.min.css') }}" rel="stylesheet">
@@ -48,8 +50,8 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Full Width</h5>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                    <h5 class="card-title"><i class="fa fa-home"></i></h5>
+                                    <p></p>
                                 </div>
                             </div>
                         </div>
@@ -82,6 +84,9 @@
         <!--Select2 -->
         <script src="{{ asset('assets/libs/select2/dist/js/select2.full.min.js') }}"></script>
         <script src="{{ asset('assets/libs/select2/dist/js/select2.min.js') }}"></script>
+        <!--Flatpickr -->
+        <script src="{{ asset('assets/libs/flatpickr/flatpickr.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/flatpickr/es.js') }}"></script>
 
         <!--Custom JavaScript -->
         <script src="{{ asset('dist/js/custom.js') }}"></script>

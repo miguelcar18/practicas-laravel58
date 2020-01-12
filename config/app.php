@@ -179,6 +179,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\CategoryServiceProvider::class,
+        App\Providers\InventoryServiceProvider::class,
         App\Providers\ProductServiceProvider::class,
         App\Providers\UserServideProvider::class,
 

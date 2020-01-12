@@ -21,5 +21,11 @@ return [
     'product_created' => 'Producto agregado',
     'product_updated' => 'Producto modificado',
     'product_deleted' => 'Producto eliminado',
+    'event_created' => 'Evento agregado',
+    'event_updated' => 'Evento modificado',
+    'event_deleted' => 'Evento eliminado',
+    'inventory_created' => 'Registro agregado',
+    'inventory_updated' => 'Registro modificado',
+    'inventory_deleted' => 'Registro eliminado',
 
 ];

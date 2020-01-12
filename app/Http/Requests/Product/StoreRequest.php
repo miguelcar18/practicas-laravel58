@@ -28,9 +28,13 @@ class StoreRequest extends BaseRequest
             'code' => [
                 'required',
                 'string',
-                Rule::unique('products'),
+                Rule::unique('products', 'code'),
             ],
-            'name' => 'required|string',
+            'name' => [
+                'required',
+                'string',
+                Rule::unique('products', 'name'),
+            ],
             'price' => 'required|numeric|min:0|gt:0',
             'category_id' => 'required|exists:categories,id',
         ];

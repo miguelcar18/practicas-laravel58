@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\EventProduct;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -13,10 +14,22 @@ class Product extends Model
      *
      * @var array
      */
-    protected $fillable = ['code', 'name', 'description', 'price', 'category_id'];
+    protected $fillable = ['id', 'code', 'name', 'description', 'price', 'category_id'];
 
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function inventory()
+    {
+        return $this->hasMany(Inventory::class);
+    }
+
+    public function events()
+    {
+        return $this->belongsToMany(Event::class)
+            ->using(EventProduct::class)
+            ->withPivot('quantity', 'start_date', 'end_date');
     }
 }

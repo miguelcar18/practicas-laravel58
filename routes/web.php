@@ -20,9 +20,13 @@ Route::get('refresh-csrf', function () {
 
 Route::get('home', ['as' => 'home', 'uses' => 'HomeController@index', 'middleware' => ['auth', 'verified']]);
 Route::get('my-profile', ['as' => 'user.my-profile', 'uses' => 'UserController@myProfile']);
-Route::resource('user', 'UserController');
-Route::resource('category', 'CategoryController');
-Route::resource('product', 'ProductController');
+Route::group(['middleware' => ['auth', 'verified']], function () {
+    Route::resource('user', 'UserController');
+    Route::resource('category', 'CategoryController');
+    Route::resource('product', 'ProductController');
+    Route::resource('inventory', 'InventoryController');
+    Route::resource('event', 'EventController');
+});
 
 /*
 Route::group(['prefix' => '/user/{user}'], function () {
