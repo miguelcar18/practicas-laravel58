@@ -81,6 +81,17 @@
 			</div>
 		</div>
 		<div class="col-md-6">
+			@if(!empty($availability = $availability ?? session()->get('availability')))
+			<div class="alert alert-danger" role="alert">
+				<h4 class="alert-heading">Cantidad de productos disponible del listado</h4>
+				<hr>
+				<ul>
+				@foreach($availability as $key => $value)
+				<li><p class="mb-0">{{ $key }}: {{ $value['available']  }}</p></li>
+				@endforeach
+				</ul>
+			</div>
+			@endif
 			<div class="card">
 				<div class="card-body">
 					<h4 class="card-title">{{ trans('pages/event.create.table_header') }}</h4>
