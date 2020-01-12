@@ -39,12 +39,12 @@ class Event extends Model
 
     public function getStartDateFormatAttribute()
     {
-        return Carbon::parse($this->start_date)->format('d/m/Y h:m A');
+        return Carbon::parse($this->start_date)->format('d/m/Y h:i A');
     }
 
     public function getEndDateFormatAttribute()
     {
-        return Carbon::parse($this->end_date)->format('d/m/Y h:m A');
+        return Carbon::parse($this->end_date)->format('d/m/Y h:i A');
     }
 
 }
