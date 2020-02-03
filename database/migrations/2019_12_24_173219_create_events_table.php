@@ -22,6 +22,10 @@ class CreateEventsTable extends Migration
             $table->string('client');
             $table->string('phone');
             $table->text('observations')->nullable();
+            $table->string('identification');
+            $table->integer('facture_code');
+            $table->string('payment_method');
+            $table->string('reference_code');
             $table->timestamps();
         });
     }

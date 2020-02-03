@@ -98,4 +98,13 @@ class ProductController extends Controller
         $product->delete();
         return back()->withSuccess(__('pages/sections/notifications.product_deleted'));
     }
+
+    public function findData(Request $request)
+    {
+        $product = Product::where("name", $request->name)->first();
+
+        return response()->json([
+            'product' => $product,
+        ], 200);
+    }
 }

@@ -26,6 +26,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('product', 'ProductController');
     Route::resource('inventory', 'InventoryController');
     Route::resource('event', 'EventController');
+    Route::get('bill/{id}', ['as' => 'event.bill', 'uses' => 'EventController@bill']);
+    Route::post('find_product', ['as' => 'product.find_data', 'uses' => 'ProductController@findData']);
 });
 
 /*

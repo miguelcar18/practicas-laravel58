@@ -69,6 +69,12 @@ return [
         'created_at' => 'Creado',
         'product' => 'Producto',
         'quantity' => 'Cantidad',
+        'identification' => 'Cédula / Rif',
+        'email' => 'Email',
+        'payment_method' => 'Método de pago',
+        'reference_code' => 'Código de referencia',
+        'unit_price' => 'Precio unitario',
+        'total_price' => 'Total',
         'submit' => [
             'save' => 'Guardar',
             'cancel' => 'Cancelar',

@@ -39,6 +39,7 @@
                                             data-confirm="{{ trans('pages/event.index.destroy.alert.confirm') }}"
                                             data-cancel="{{ trans('pages/event.index.destroy.alert.cancel') }}"
                                             class="btn btn-danger tooltip-error"><i class="fas fa-trash"></i></a>
+                                        <a href="{{ route('event.bill', $event->id) }}" class="btn btn-info" target="_blank"><i class=" fas fa-file-pdf"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach

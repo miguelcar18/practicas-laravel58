@@ -39,6 +39,8 @@ class UpdateRequest extends FormRequest
             'products.*' => 'string|exists:products,name|distinct',
             'quantities' => 'required|array',
             'quantities.*' => 'numeric|min:1',
+            'identification' => 'required|string',
+            'email' => 'required|email',
         ];
     }
 }

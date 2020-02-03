@@ -18,7 +18,7 @@ class Event extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'address', 'start_date', 'end_date', 'client', 'phone', 'observations'];
+    protected $fillable = ['name', 'address', 'start_date', 'end_date', 'client', 'phone', 'observations', 'identification', 'facture_code', 'email', 'payment_method', 'reference_code'];
 
     public function products()
     {
@@ -47,4 +47,8 @@ class Event extends Model
         return Carbon::parse($this->end_date)->format('d/m/Y h:i A');
     }
 
+    public function getStartDateNotificationFormatAttribute()
+    {
+        return Carbon::parse($this->start_date)->format('d/m/Y') . " a las " . Carbon::parse($this->start_date)->format('h:i A');
+    }
 }

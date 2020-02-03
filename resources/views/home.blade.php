@@ -6,10 +6,10 @@
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <meta name="title" content="@yield('page-title') | {{ config('app.name', 'Eventos felices') }}">
+        <meta name="title" content="@yield('page-title') | {{ config('app.name', 'Eventos felice') }}">
         <meta description="@yield('page-description')">
 
-        <title>@yield('page-title') | {{ config('app.name', 'Eventos felices') }}</title>
+        <title>@yield('page-title') | {{ config('app.name', 'Eventos felice') }}</title>
 
         <!-- Favicon icon -->
         <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/favicon.png') }}">
@@ -50,8 +50,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title"><i class="fa fa-home"></i></h5>
-                                    <p></p>
+                                    @include('layouts.dashboard')
                                 </div>
                             </div>
                         </div>

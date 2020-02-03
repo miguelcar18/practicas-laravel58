@@ -15,10 +15,28 @@
 				<div class="card-body">
 					<h4 class="card-title">{{ trans('pages/event.create.form_header') }}</h4>
 					<div class="form-group row">
+						<label for="identification" class="col-sm-3 text-right control-label col-form-label">{{ trans('pages/event.fields.identification') }}</label>
+						<div class="col-sm-7">
+							{!! Form::text('identification', old('identification'), ['class' => $errors->first('identification') ? 'form-control is-invalid' : 'form-control', 'placeholder' => trans('pages/event.fields.identification'), 'required' => true]) !!}
+							@error('identification')
+							<div class="invalid-feedback">{{ $message }}</div>
+							@enderror
+						</div>
+					</div>
+					<div class="form-group row">
 						<label for="name" class="col-sm-3 text-right control-label col-form-label">{{ trans('pages/event.fields.name') }}</label>
 						<div class="col-sm-7">
 							{!! Form::text('name', old('name'), ['class' => $errors->first('name') ? 'form-control is-invalid' : 'form-control', 'placeholder' => trans('pages/event.fields.name'), 'required' => true]) !!}
 							@error('name')
+							<div class="invalid-feedback">{{ $message }}</div>
+							@enderror
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="email" class="col-sm-3 text-right control-label col-form-label">{{ trans('pages/event.fields.email') }}</label>
+						<div class="col-sm-7">
+							{!! Form::email('email', old('email'), ['class' => $errors->first('email') ? 'form-control is-invalid' : 'form-control', 'placeholder' => trans('pages/event.fields.email'), 'required' => true]) !!}
+							@error('email')
 							<div class="invalid-feedback">{{ $message }}</div>
 							@enderror
 						</div>
@@ -64,6 +82,24 @@
 						<div class="col-sm-7">
 							{!! Form::text('phone', old('phone'), ['class' => $errors->first('phone') ? 'form-control is-invalid' : 'form-control', 'placeholder' => trans('pages/event.fields.phone'), 'required' => true]) !!}
 							@error('phone')
+							<div class="invalid-feedback">{{ $message }}</div>
+							@enderror
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="payment_method" class="col-sm-3 text-right control-label col-form-label">{{ trans('pages/event.fields.payment_method') }}</label>
+						<div class="col-sm-7">
+							{!! Form::select('payment_method', ['' => __("select"), 'pago_movil' => "Pago movil", 'transferencia' => "Transferencia"],  old('payment_method'), ['class' => 'form-control select2 hidden-search']) !!}
+							@error('payment_method')
+							<div class="invalid-feedback">{{ $message }}</div>
+							@enderror
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="reference_code" class="col-sm-3 text-right control-label col-form-label">{{ trans('pages/event.fields.reference_code') }}</label>
+						<div class="col-sm-7">
+							{!! Form::text('reference_code', old('reference_code'), ['class' => $errors->first('reference_code') ? 'form-control is-invalid' : 'form-control', 'placeholder' => trans('pages/event.fields.reference_code'), 'required' => true]) !!}
+							@error('reference_code')
 							<div class="invalid-feedback">{{ $message }}</div>
 							@enderror
 						</div>
@@ -118,6 +154,9 @@
 						<tr>
 							<th scope="col">{{ trans('pages/event.fields.product') }}</th>
 							<th scope="col">{{ trans('pages/event.fields.quantity') }}</th>
+							<th scope="col">{{ trans('pages/event.fields.unit_price') }}</th>
+							<th scope="col">{{ trans('pages/event.fields.total_price') }}</th>
+							<th scope="col">{{ trans('pages/event.index.columns.actions') }}</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -126,6 +165,8 @@
 						<tr>
 							<td><input type="hidden" name="products[]" value="{{ old('products')[$key] }}" />{{ old('products')[$key] }}</td>
 							<td><input type="hidden" name="quantities[]" value="{{ old('quantities')[$key] }}" /><span>{{ old('quantities')[$key] }}</span></td>
+							<td><input type="hidden" name="prices[]" value="{{ old('prices')[$key] }}" />{{ old('prices')[$key] }}</td>
+							<td><input type="hidden" name="totals[]" value="{{ old('totals')[$key] }}" />{{ old('totals')[$key] }}</td>
 							<td>
 								<button class="btn btn-danger btn--icon remove_product" title="{{ __('remove') }}" type="button">
 									<i class="fa fa-minus"></i>
@@ -173,22 +214,39 @@
 			let product_val = $("select[name=product]").val(),
 			product_text = $("select[name=product] option:selected").text(),
 			quantity = $("input[name=quantity]").val(),
-			htmlTags;
+			htmlTags, price;
+
 			if(!product_val || !quantity){
 				toastr.error('', '{{ __('Product and quantity are required') }}');
 			}
 			else{
-				htmlTags = '<tr>'+
-				'<td><input type="hidden" name="products[]" value="'+product_val+'" />' + product_text + '</td>'+
-				'<td><input type="hidden" name="quantities[]" value="'+quantity+'" /><span>' + quantity + '</span></td>'+
-				'<td><button class="btn btn-danger btn--icon remove_product" title="{{ __('remove') }}" type="button"><i class="fa fa-minus"></button></td>'+
-				'</tr>';
+				$.ajax({
+					url: "{{ route('product.find_data') }}",
+					data: {
+						"_token": "{{ csrf_token() }}",
+						name: product_val
+					},
+					type: 'POST',
+					success: function(response) {
+						price = response.product.price;
+						htmlTags = '<tr>'+
+						'<td><input type="hidden" name="products[]" value="'+product_val+'" />' + product_text + '</td>'+
+						'<td><input type="hidden" name="quantities[]" value="'+quantity+'" /><span>' + quantity + '</span></td>'+
+						'<td><input type="hidden" name="prices[]" value="'+price+'" />'+ price +'</td>'+
+						'<td><input type="hidden" name="totals[]" value="'+(parseFloat(quantity) * parseFloat(price))+'" />'+parseFloat(quantity) * parseFloat(price)+'</td>'+
+						'<td><button class="btn btn-danger btn--icon remove_product" title="{{ __('remove') }}" type="button"><i class="fa fa-minus"></button></td>'+
+						'</tr>';
 
-				$('.products_table tbody').append(htmlTags);
-				$("select[name=product]").find("option[value='"+product_val+"']").prop("disabled",true);
-				$('select[name=product]').prop('selectedIndex',0);
-				$("select[name=product]").select2();
-				$("input[name=quantity]").val("");
+						$('.products_table tbody').append(htmlTags);
+						$("select[name=product]").find("option[value='"+product_val+"']").prop("disabled",true);
+						$('select[name=product]').prop('selectedIndex',0);
+						$("select[name=product]").select2();
+						$("input[name=quantity]").val("");
+					},
+					error: function ( jqXHR, textStatus, errorThrown ) {
+						console.log({jqXHR, textStatus, errorThrown});
+					},
+				});
 			}
 		});
 

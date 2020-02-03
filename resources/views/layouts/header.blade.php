@@ -14,7 +14,7 @@
                  <!-- Logo text -->
                 <span class="logo-text">
                      <!-- dark Logo text -->
-                     <h4 class="card-title m-t-10">{{ config('app.name', 'Eventos felices') }}</h4>
+                     <h4 class="card-title m-t-10">{{ config('app.name', 'Eventos felice') }}</h4>
                 </span>
                 <!-- Logo icon -->
                 <!-- <b class="logo-icon"> -->

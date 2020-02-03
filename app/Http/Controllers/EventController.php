@@ -54,9 +54,10 @@ class EventController extends Controller
 
         if ($switch) {
             DB::transaction(function () use ($request) {
-                $event = new Event($request->only('name', 'address', 'client', 'phone', 'observations'));
+                $event = new Event($request->only('name', 'address', 'client', 'phone', 'observations', 'identification', 'email'));
                 $event->start_date = Carbon::createFromFormat("d/m/Y h:i A", $request->start_date)->toDateTimeString();
                 $event->end_date = Carbon::createFromFormat("d/m/Y h:i A", $request->end_date)->toDateTimeString();
+                $event->facture_code = Event::last()->facture_code + 1;
                 $event->save();
 
                 $event->syncEvents($request->products, $request->quantities, Carbon::createFromFormat("d/m/Y h:i A", $request->start_date)->toDateTimeString(), Carbon::createFromFormat("d/m/Y h:i A", $request->end_date)->toDateTimeString());
@@ -110,7 +111,7 @@ class EventController extends Controller
         }
         if ($switch) {
             DB::transaction(function () use ($request, $event) {
-                $event->update($request->only('name', 'address', 'client', 'phone', 'observations'));
+                $event->update($request->only('name', 'address', 'client', 'phone', 'observations', 'identification', 'email'));
                 $event->start_date = Carbon::createFromFormat("d/m/Y h:i A", $request->start_date)->toDateTimeString();
                 $event->end_date = Carbon::createFromFormat("d/m/Y h:i A", $request->end_date)->toDateTimeString();
                 $event->save();
@@ -141,7 +142,7 @@ class EventController extends Controller
         foreach ($products as $key => $value) {
             $product = Product::where("name", $value)->first();
 
-            $oldQuantity = (!empty($register)) ? EventProduct::where(["product_id" => $product->id, "event_id" => $register->id])->first()->quantity : 0;
+            $oldQuantity = (!empty($register)) ? EventProduct::where(["product_id" => $product->id, "event_id" => $register->id])->first()->quantity ?? 0 : 0;
 
             $amount_used = EventProduct::where(["product_id" => $product->id])->where("start_date", ">=", $start_date)->where("end_date", "<=", $end_date)->sum('quantity');
             $input = Inventory::where(["product_id" => $product->id, "type" => "input"])->sum('quantity');
@@ -156,5 +157,23 @@ class EventController extends Controller
             ];
         }
         return $array;
+    }
+
+    public function bill($id)
+    {
+        $date = Carbon::now()->format('d/m/Y');
+        $event = Event::find($id);
+        $subtotal = 0;
+        $iva = 0;
+        $total = 0;
+        foreach ($event->products as $data) {
+            $subtotal = $subtotal + ($data->pivot->quantity * $data->price);
+        }
+
+        $iva = $subtotal * 0.16;
+        $total = $subtotal + $iva;
+
+        $pdf = \PDF::loadView('event.bill', compact('date', 'event', 'subtotal', 'iva', 'total'));
+        return $pdf->stream('factura.pdf');
     }
 }
