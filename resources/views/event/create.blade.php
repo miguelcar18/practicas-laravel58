@@ -228,20 +228,24 @@
 					},
 					type: 'POST',
 					success: function(response) {
-						price = response.product.price;
-						htmlTags = '<tr>'+
-						'<td><input type="hidden" name="products[]" value="'+product_val+'" />' + product_text + '</td>'+
-						'<td><input type="hidden" name="quantities[]" value="'+quantity+'" /><span>' + quantity + '</span></td>'+
-						'<td><input type="hidden" name="prices[]" value="'+price+'" />'+ price +'</td>'+
-						'<td><input type="hidden" name="totals[]" value="'+(parseFloat(quantity) * parseFloat(price))+'" />'+parseFloat(quantity) * parseFloat(price)+'</td>'+
-						'<td><button class="btn btn-danger btn--icon remove_product" title="{{ __('remove') }}" type="button"><i class="fa fa-minus"></button></td>'+
-						'</tr>';
+						if(quantity > response.balance){
+							toastr.error('', '{{ __('Not enough quantity in inventory') }}' + ' (Balance: ' + response.balance + ')');
+						} else {
+							price = response.product.price;
+							htmlTags = '<tr>'+
+							'<td><input type="hidden" name="products[]" value="'+product_val+'" />' + product_text + '</td>'+
+							'<td><input type="hidden" name="quantities[]" value="'+quantity+'" /><span>' + quantity + '</span></td>'+
+							'<td><input type="hidden" name="prices[]" value="'+price+'" />'+ price +'</td>'+
+							'<td><input type="hidden" name="totals[]" value="'+(parseFloat(quantity) * parseFloat(price))+'" />'+parseFloat(quantity) * parseFloat(price)+'</td>'+
+							'<td><button class="btn btn-danger btn--icon remove_product" title="{{ __('remove') }}" type="button"><i class="fa fa-minus"></button></td>'+
+							'</tr>';
 
-						$('.products_table tbody').append(htmlTags);
-						$("select[name=product]").find("option[value='"+product_val+"']").prop("disabled",true);
-						$('select[name=product]').prop('selectedIndex',0);
-						$("select[name=product]").select2();
-						$("input[name=quantity]").val("");
+							$('.products_table tbody').append(htmlTags);
+							$("select[name=product]").find("option[value='"+product_val+"']").prop("disabled",true);
+							$('select[name=product]').prop('selectedIndex',0);
+							$("select[name=product]").select2();
+							$("input[name=quantity]").val("");
+						}
 					},
 					error: function ( jqXHR, textStatus, errorThrown ) {
 						console.log({jqXHR, textStatus, errorThrown});

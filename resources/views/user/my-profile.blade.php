@@ -14,7 +14,11 @@
                 <div class="card-body">
                 	<div class="row">
                 		<div class="col-md-4 offset-md-4">
+                            @if( !auth()->user()->path )
                 			<img src="{{ asset('assets/images/background/img4.jpg') }}" class="img-fluid" style="max-width: 300px; height: auto">
+                            @else
+                            <img src="{{ asset(auth()->user()->url_path) }}" class="img-fluid" style="max-width: 300px; height: auto">
+                            @endif
                 		</div>
                 	</div>
                 	<div class="pull-center text-center">
@@ -26,10 +30,30 @@
                 	</div>
             	</div>
             </div>
+            <div class="card">
+                {!! Form::open(['route' => ['user.photo.change', $user], 'class' => 'form-horizontal', 'files' => true]) !!}
+                <div class="card-body">
+                    <div class="form-group row">
+                        <label for="image" class="col-md-3 text-right control-label col-form-label">{{ trans('pages/user.fields.image') }}</label>
+                        <div class="col-md-7">
+                            <div class="custom-file">
+                                {{ Form::file('file', ['class' => 'form-control']) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-top">
+                    <div class="card-body">
+                        {!! Form::submit(trans('pages/user.fields.submit.save'), ['class' => 'btn btn-primary float-right']) !!}
+                        <br>
+                    </div>
+                </div>
+                {!! Form::close() !!}
+            </div>
         </div>
     </div>
 </div>
-					
+
 @endsection
 
 @section('styles')

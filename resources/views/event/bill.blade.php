@@ -29,11 +29,11 @@
         <div id="header">
             <div style="float:left">
                 <br>
-                <b>Dirección completa</b>
+                <b>Carrera 14 con Calle Cumaná Nº 53</b>
                 <br>
-                <b>de la organización</b>
+                <b>Brisas del Orinoco</b>
                 <br>
-                <b>INSERTE RIF AQUI</b>
+                <b>RIF: J-10042594-3</b>
             </div>
             <div style="float:right">
                 <img src="{{ asset('assets/images/logo.png') }}" width="auto" height="100px">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Http\Requests\Product\StoreRequest;
 use App\Http\Requests\Product\UpdateRequest;
+use App\Inventory;
 use App\Product;
 use DB;
 use Illuminate\Http\Request;
@@ -102,9 +103,13 @@ class ProductController extends Controller
     public function findData(Request $request)
     {
         $product = Product::where("name", $request->name)->first();
+        $input = Inventory::where(["product_id" => $product->id, "type" => "input"])->sum('quantity');
+        $output = Inventory::where(["product_id" => $product->id, "type" => "output"])->sum('quantity');
+        $balance = $input - $output;
 
         return response()->json([
             'product' => $product,
+            'balance' => $balance
         ], 200);
     }
 }

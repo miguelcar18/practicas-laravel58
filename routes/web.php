@@ -20,6 +20,7 @@ Route::get('refresh-csrf', function () {
 
 Route::get('home', ['as' => 'home', 'uses' => 'HomeController@index', 'middleware' => ['auth', 'verified']]);
 Route::get('my-profile', ['as' => 'user.my-profile', 'uses' => 'UserController@myProfile']);
+Route::post('photo/{user}', ['as' => 'user.photo.change', 'uses' => 'UserController@photoChange']);
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('user', 'UserController');
     Route::resource('category', 'CategoryController');
@@ -30,10 +31,18 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('find_product', ['as' => 'product.find_data', 'uses' => 'ProductController@findData']);
 });
 
-/*
-Route::group(['prefix' => '/user/{user}'], function () {
-Route::match(['post', 'put'], 'password/change', ['as' => 'password.change', 'uses' => 'UserController@passwordChange']);
-Route::match(['post', 'put'], 'photo', ['as' => 'user.photo.change', 'uses' => 'UserController@photoChange']);
-Route::get('/groups', ['as' => 'user.groups', 'uses' => 'UserController@getGroups']);
+Route::get('storage/{filename}', function ($filename) {
+    $path = storage_path('public/' . $filename);
+
+    if (!File::exists($path)) {
+        abort(404);
+    }
+
+    $file = File::get($path);
+    $type = File::mimeType($path);
+
+    $response = Response::make($file, 200);
+    $response->header("Content-Type", $type);
+
+    return $response;
 });
- */

@@ -10,6 +10,16 @@
 <div class="container-fluid">
     {!! Form::open(['route' => ['event.update', $event], 'class' => 'form-horizontal']) !!}
 	    {{ method_field('PUT') }}
+@if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <p>Corrige los siguientes errores:</p>
+        <ul>
+            @foreach ($errors->all() as $message)
+                <li>{{ $message }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     	<div class="row">
     		<div class="col-md-6">
     			<div class="card">
@@ -177,7 +187,7 @@
                             @elseif(!empty($event->products))
                                 @foreach($event->products as $product)
                                 <tr>
-                                    <td><input type="hidden" name="products[]" value="{{ $product->title }}" />{{ $product->name }}</td>
+                                    <td><input type="hidden" name="products[]" value="{{ $product->name }}" />{{ $product->name }}</td>
                                     <td><input type="hidden" name="quantities[]" value="{{ $product->pivot->quantity }}" /><span>{{ $product->pivot->quantity }}</span></td>
                                     <td><input type="hidden" name="prices[]" value="{{ $product->price }}" />{{ $product->price }}</td>
                                     <td><input type="hidden" name="totals[]" value="{{ $product->price * $product->pivot->quantity }}" />{{ $product->price * $product->pivot->quantity }}</td>
@@ -241,20 +251,24 @@
                     },
                     type: 'POST',
                     success: function(response) {
-                        price = response.price;
-                        htmlTags = '<tr>'+
-                        '<td><input type="hidden" name="products[]" value="'+product_val+'" />' + product_text + '</td>'+
-                        '<td><input type="hidden" name="quantities[]" value="'+quantity+'" /><span>' + quantity + '</span></td>'+
-                        '<td><input type="hidden" name="prices[]" value="'+price+'" />'+ price +'</td>'+
-                        '<td><input type="hidden" name="totals[]" value="'+(parseFloat(quantity) * parseFloat(price))+'" />'+ parseFloat(quantity) * parseFloat(price) +'</td>'+
-                        '<td><button class="btn btn-danger btn--icon remove_product" title="{{ __('remove') }}" type="button"><i class="fa fa-minus"></button></td>'+
-                        '</tr>';
+                        if(quantity > response.balance){
+                            toastr.error('', '{{ __('Not enough quantity in inventory') }}' + ' (Balance: ' + response.balance + ')');
+                        } else {
+                            price = response.price;
+                            htmlTags = '<tr>'+
+                            '<td><input type="hidden" name="products[]" value="'+product_val+'" />' + product_text + '</td>'+
+                            '<td><input type="hidden" name="quantities[]" value="'+quantity+'" /><span>' + quantity + '</span></td>'+
+                            '<td><input type="hidden" name="prices[]" value="'+price+'" />'+ price +'</td>'+
+                            '<td><input type="hidden" name="totals[]" value="'+(parseFloat(quantity) * parseFloat(price))+'" />'+ parseFloat(quantity) * parseFloat(price) +'</td>'+
+                            '<td><button class="btn btn-danger btn--icon remove_product" title="{{ __('remove') }}" type="button"><i class="fa fa-minus"></button></td>'+
+                            '</tr>';
 
-                        $('.products_table tbody').append(htmlTags);
-                        $("select[name=product]").find("option[value='"+product_val+"']").prop("disabled",true);
-                        $('select[name=product]').prop('selectedIndex',0);
-                        $("select[name=product]").select2();
-                        $("input[name=quantity]").val("");
+                            $('.products_table tbody').append(htmlTags);
+                            $("select[name=product]").find("option[value='"+product_val+"']").prop("disabled",true);
+                            $('select[name=product]').prop('selectedIndex',0);
+                            $("select[name=product]").select2();
+                            $("input[name=quantity]").val("");
+                        }
                     },
                     error: function ( jqXHR, textStatus, errorThrown ) {
                         console.log({jqXHR, textStatus, errorThrown});

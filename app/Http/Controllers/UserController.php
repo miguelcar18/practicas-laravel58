@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\User\StoreRequest;
 use App\Http\Requests\User\UpdateRequest;
 use App\User;
-use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Storage;
 
 class UserController extends Controller
 {
@@ -47,9 +47,9 @@ class UserController extends Controller
             $user->save();
 
             if (!empty($request->file('file'))) {
-                $fileName = str_replace(' ', '_', Carbon::now()->toDateTimeString() . $request->file('file')->getClientOriginalName());
-                $path = $request->file('file')->storeAs($user->id, $fileName);
-                $user->path = $path . "/" . $fileName;
+                $fileName = $request->file('file')->getClientOriginalName();
+                $path = $request->file('file')->storeAs($user->id, $fileName, 'public');
+                $user->path = $path;
                 $user->save();
             }
         });
@@ -118,5 +118,23 @@ class UserController extends Controller
     {
         $user->delete();
         return back()->withSuccess(__('pages/sections/notifications.user_deleted'));
+    }
+
+    public function photoChange(Request $request, User $user)
+    {
+        DB::transaction(function () use ($request, $user) {
+            if (!empty($request->file('file'))) {
+
+                if (!empty($user->path)) {
+                    Storage::delete($user->path);
+                }
+
+                $fileName = $request->file('file')->getClientOriginalName();
+                $path = $request->file('file')->storeAs($user->id, $fileName, 'public');
+                $user->path = $path;
+                $user->save();
+            }
+        });
+        return back()->withSuccess(__('pages/sections/notifications.user_updated'));
     }
 }

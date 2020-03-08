@@ -19,11 +19,11 @@ class HomeController extends Controller
     public function index()
     {
         $event = Event::where('start_date', ">=", Carbon::now()->toDateTimeString())->orderBy('start_date', 'ASC')->first();
-        $categories = Category::count();
+        $categoriess = Category::count();
         $events = Event::count();
         $inventories = Inventory::count();
-        $products = Product::count();
+        $productss = Product::count();
         $users = User::count();
-        return view('home', compact('categories', 'events', 'inventories', 'products', 'users', 'event'));
+        return view('home', compact('categoriess', 'events', 'inventories', 'productss', 'users', 'event'));
     }
 }

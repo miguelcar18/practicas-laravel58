@@ -38,7 +38,7 @@
         @show
     </head>
     <body>
-        @include('layouts.preloader')
+        {{-- @include('layouts.preloader') --}}
         <div id="main-wrapper">
             @include('layouts.header')
             @include('layouts.sidebar')

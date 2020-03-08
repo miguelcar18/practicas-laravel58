@@ -3,7 +3,7 @@
         <div class="navbar-header" data-logobg="skin5">
             <!-- This is for the sidebar toggle which is visible on mobile only -->
             <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="{{ URL::route('home') }}">
                 <!-- Logo icon -->
                 <b class="logo-icon p-l-10">
                     <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
@@ -36,7 +36,14 @@
             <ul class="navbar-nav float-right">
                 <!-- User profile and search -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ asset('assets/images/users/1.jpg') }}" alt="user" class="rounded-circle" width="31"></a>
+                    <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        @if( !auth()->user()->path )
+                        <img src="{{ asset('assets/images/users/1.jpg') }}" alt="user" class="rounded-circle" width="31">
+                        @else
+                        <img src="{{ asset(auth()->user()->url_path) }}" alt="user" class="rounded-circle" width="31">
+                        @endif
+
+                    </a>
                     <div class="dropdown-menu dropdown-menu-right user-dd animated">
                         <a class="dropdown-item" href="{{ route('user.my-profile') }}"><i class="ti-user m-r-5 m-l-5"></i> {{ trans('pages/sections/logged-in-user.my_profile') }}</a>
                         <div class="dropdown-divider"></div>

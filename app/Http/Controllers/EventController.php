@@ -54,10 +54,15 @@ class EventController extends Controller
 
         if ($switch) {
             DB::transaction(function () use ($request) {
-                $event = new Event($request->only('name', 'address', 'client', 'phone', 'observations', 'identification', 'email'));
+                $event = new Event($request->only('name', 'address', 'client', 'phone', 'observations', 'identification', 'email', 'payment_method', 'reference_code'));
                 $event->start_date = Carbon::createFromFormat("d/m/Y h:i A", $request->start_date)->toDateTimeString();
                 $event->end_date = Carbon::createFromFormat("d/m/Y h:i A", $request->end_date)->toDateTimeString();
-                $event->facture_code = Event::last()->facture_code + 1;
+                if (Event::count() > 0) {
+                    $event->facture_code = Event::latest('facture_code')->first()->facture_code + 1;
+                } else {
+                    $event->facture_code = 1;
+                }
+
                 $event->save();
 
                 $event->syncEvents($request->products, $request->quantities, Carbon::createFromFormat("d/m/Y h:i A", $request->start_date)->toDateTimeString(), Carbon::createFromFormat("d/m/Y h:i A", $request->end_date)->toDateTimeString());
@@ -111,7 +116,7 @@ class EventController extends Controller
         }
         if ($switch) {
             DB::transaction(function () use ($request, $event) {
-                $event->update($request->only('name', 'address', 'client', 'phone', 'observations', 'identification', 'email'));
+                $event->update($request->only('name', 'address', 'client', 'phone', 'observations', 'identification', 'email', 'payment_method', 'reference_code'));
                 $event->start_date = Carbon::createFromFormat("d/m/Y h:i A", $request->start_date)->toDateTimeString();
                 $event->end_date = Carbon::createFromFormat("d/m/Y h:i A", $request->end_date)->toDateTimeString();
                 $event->save();

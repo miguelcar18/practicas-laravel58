@@ -110,8 +110,17 @@ class InventoryController extends Controller
      */
     public function destroy(Inventory $inventory)
     {
-        $inventory->delete();
-        return back()->withSuccess(__('pages/sections/notifications.inventory_deleted'));
+        $quantity = ($inventory->type == "input") ? -$inventory->quantity : $inventory->quantity;
+        $input = Inventory::where(["product_id" => $inventory->product_id, "type" => "input"])->sum('quantity');
+        $output = Inventory::where(["product_id" => $inventory->product_id, "type" => "output"])->sum('quantity');
+        $balance = $input - $output + $quantity;
+
+        if ($balance < 0) {
+            return back()->with('error', __('Cannot be disposed of due to insufficient inventory'))->withInput();
+        } else {
+            $inventory->delete();
+            return back()->withSuccess(__('pages/sections/notifications.inventory_deleted'));
+        }
     }
 
     public function balance($type, $product_id, $quantity, $register = null)

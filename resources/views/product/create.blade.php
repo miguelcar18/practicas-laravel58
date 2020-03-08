@@ -43,7 +43,7 @@
 	                    <div class="form-group row">
 	                        <label for="price" class="col-sm-3 text-right control-label col-form-label">{{ trans('pages/product.fields.price') }}</label>
 	                        <div class="col-sm-7">
-	                            {!! Form::input('number', 'price', old('price'), ['class' => $errors->first('price') ? 'form-control is-invalid' : 'form-control', 'placeholder' => trans('pages/product.fields.price'), 'required' => true, 'step' => 'any']) !!}
+	                            {!! Form::input('number', 'price', old('price'), ['class' => $errors->first('price') ? 'form-control is-invalid' : 'form-control', 'placeholder' => trans('pages/product.fields.price'), 'required' => true, 'step' => 'any', 'min' => '1']) !!}
 	                            @error('price')
 	                            	<div class="invalid-feedback">{{ $message }}</div>
 	                            @enderror

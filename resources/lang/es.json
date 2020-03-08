@@ -50,5 +50,7 @@
     "select": "Seleccione",
     "add": "Agregar",
     "remove": "Eliminar",
-    "Product and quantity are required": "Producto y cantidad son requeridos"
+    "Product and quantity are required": "Producto y cantidad son requeridos",
+    "Cannot be disposed of due to insufficient inventory": "No se puede eliminar por cantidad insuficiente en inventario",
+    "Not enough quantity in inventory": "Cantidad insuficiente en inventario"
 }
